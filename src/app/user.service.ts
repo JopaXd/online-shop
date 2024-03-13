@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { User } from "./models/user";
 
+interface loginInput{
+  email:string;
+  password:string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +35,7 @@ export class UserService {
       }
   ]
 
-  currentUser:User;
+  currentUser:User | null = null;
 
   constructor() { }
 
@@ -47,6 +52,26 @@ export class UserService {
     this.users.push(newUser);
     this.currentUser = newUser;
     return 0
+  }
+
+  login(userInput:loginInput):number {
+    let loggedIn:boolean = false;
+    let userToLogin:User | null = null;
+    this.users.forEach((u:User) => {
+      if (userInput.email === u.email){
+        if (userInput.password === u.password){
+          loggedIn = true;
+          userToLogin = u;
+        }
+      }
+    })
+    if (loggedIn) {
+      this.currentUser = userToLogin;
+      return 0;
+    }
+    else{
+      return -1;
+    }
   }
 
   getCurrentUser() {
