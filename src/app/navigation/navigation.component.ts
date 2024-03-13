@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'Navigation',
@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class NavigationComponent {
 
   sidebarToggle:boolean = false;
-
+  
   toggle(){
     this.sidebarToggle = !this.sidebarToggle;
   }
