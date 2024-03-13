@@ -1,0 +1,47 @@
+<div class="z-0 navbar w-100 border-b-2 border-b-black box-">
+  <div class="navbar-content w-full p-5 flex justify-between items-center">
+    <div class="navbar-start">
+      <button (click)="toggle()" class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+        <span *ngIf="!sidebarToggle" class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150">
+          menu
+        </span>
+        <span *ngIf="sidebarToggle" class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150">
+          close
+        </span>
+      </button>
+      <button class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> search </span>
+      </button>
+    </div>
+    <div class="navbar-center">
+      <p class="text-center font-bold text-2xl">Online Shop!</p>
+    </div>
+    <div class="navbar-end">
+      
+      <button class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2 hover:text-indigo-600 transition duration-150">
+        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> favorite </span>
+      </button>
+      <button class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> shopping_cart </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="sidenav bg-gray-200 transition-all duration-500 text-black z-1 h-screen fixed top-0 -left-full w-80"
+  [class.left-0]="sidebarToggle">
+  <div class="justify-center w-100 h-100">
+    <div class="sidebar-header">
+    	<div class="sidebar-header-content m-4">
+      <button (click)="toggle()" class="hover:text-indigo-600 transition duration-150">
+        <span *ngIf="sidebarToggle" class="material-symbols-outlined">
+          close
+        </span>
+      </button>
+      <p class="text-3xl mt-4 text-center mb-6 font-bold">Online Shop!</p>
+    	</div>
+      <hr class="w-full bg-black text-black border-black h-1" />
+    </div>
+  </div>
+</div>
