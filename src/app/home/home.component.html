@@ -42,9 +42,9 @@
 	  <p class="text-4xl">Our Picks</p>
 	  <a href="#" class="text-xl">See all</a>
   	</div>
-  	<div class="picks mt-20 flex justify-between">
-	  	<div class="pick" *ngFor="let product of randomProducts">
-		  	<img class="text-center avatar rounded-md w-60 h-60" src="{{ product.image }}"/>	
+  	<div class="picks mt-20 flex justify-between text-center">
+	  	<div class="pick flex-1" *ngFor="let product of randomProducts">
+		  	<img class="ml-auto mr-auto rounded-md w-60 h-60" src="{{ product.image }}"/>	
 		  	<p class="text-md text-center mt-4">{{ product.name }}</p>
 		  	<p class="text-md text-indigo-600 text-center">{{ product.price }}</p>
 	  	</div>
