@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,8 @@ export class RegisterComponent implements OnInit  {
   error?: string;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _userSvc: UserService
   ) {}
 
   ngOnInit() {
@@ -35,6 +38,19 @@ export class RegisterComponent implements OnInit  {
       return;
     }
 
-    console.log(this.form.value);
+    let status:number = this._userSvc.register({
+      "firstName": this.form.value.firstName,
+      "lastName": this.form.value.lastName,
+      "email": this.form.value.email,
+      "dateOfBirth": this.form.value.dateOfBirth,
+      "password": this.form.value.password
+    });
+    console.log(status);
+    if (status === -1){
+      this.error = "An account with this email already exists!"
+    }
+    else if (status === 0){
+      console.log("success!");
+    }
   }
 }
