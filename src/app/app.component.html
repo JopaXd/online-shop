@@ -1,4 +1,12 @@
-<Navigation/>
-
-<router-outlet />
+<div class="min-h-screen m-0 flex flex-col">
+	<div class="app-header">
+		<Navigation class="min-h-[50px]"/>	
+	</div>
+	<div class="app-content flex-1">
+		<router-outlet />
+	</div>
+	<div class="app-footer">
+		<app-footer class="min-h-[50px]"/>	
+	</div>
+</div>
 
