@@ -1,1 +1,49 @@
-<p>products works!</p>
+<div class="products-content mt-28 mb-20 ml-3 mr-3 max-w-100">
+  <div class="products-title">
+    <p class="text-3xl text-center font-bold">
+      Easily find what you're looking for
+    </p>
+  </div>
+  <div class="product-searchbar ml-auto mr-auto max-w-xl mt-10 pl-50 pr-50">
+    <div class="relative">
+      <div
+        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+      >
+        <svg
+          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 20 20"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+          />
+        </svg>
+      </div>
+      <input
+      	[(ngModel)]="userSearch"
+      	(ngModelChange)="search(userSearch)"
+        type="search"
+        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-600 focus:border-indigo-600 dark:focus:border-indigo-600 shadow-xl"
+        placeholder="Search clothes!"
+      />
+    </div>
+  </div>
+  <div class="product-tags flex flex-wrap justify-center mt-20">
+  	<div *ngFor="let tag of tagCounts" class="text-center max-sm:basis-[50%]">
+  		<button class="mb-5 mt-5 tag ml-10 mr-10 p-2 shadow-2xl rounded-xl max-sm:h-20 max-sm:w-20 hover:text-indigo-600 duration-150">{{ tag.tag }} ({{ tag.count }})</button>
+  	</div>
+  </div>
+  <div class="items-list ml-20 mr-20 mt-20 flex lg:justify-center sm:justify-center text-center flex-wrap">
+  	<div class="item mr-10 ml-10 mb-20 lg:basis-[28%] md:basis-[50%] sm:basis-[100%] max-sm:basis-[100%]" *ngFor="let product of productsToShow">
+  		<img class="ml-auto mr-auto rounded-md md:w-60 md:h-60 w-20 h-20" src="{{ product.image }}"/>	
+	  	<p class="md:text-xl text-sm text-center mt-4">{{ product.name }}</p>
+		<p class="md:text-xl text-sm text-indigo-600 text-center">{{ product.price }}</p>
+  	</div>
+  </div>
+</div>

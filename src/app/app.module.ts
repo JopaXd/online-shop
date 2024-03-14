@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductsComponent } from './products/products.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProductsComponent } from './products/products.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
