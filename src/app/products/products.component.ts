@@ -12,23 +12,39 @@ export class ProductsComponent implements OnInit {
   constructor(private _productSvc: ProductService) {}
 
   tagCounts:Array<TagCount>; 
-  allProducts:Array<Product> = [];
   productsToShow:Array<Product> = [];
-  userSearch:string;
+  userSearch:string = "";
+  selectedTag: string = "all";
 
   search(text:string){
+    this.applyFilters();
+  }
+
+  setTag(tag:string) {
+    this.selectedTag = tag;
+    this.applyFilters();
+  }
+
+  applyFilters(){
     this.productsToShow = []
-    this.allProducts.forEach((p:Product) => {
-      if (p.name.toLowerCase().includes(text.toLowerCase())){
-        this.productsToShow.push(p);
+    //Tag first:
+    this._productSvc.getAllProducts().forEach((p:Product) => {
+      if (this.selectedTag == "all"){
+        if (p.name.toLowerCase().includes(this.userSearch.toLowerCase())) {
+          this.productsToShow.push(p);
+        }
       }
+      else{
+        if (p.tags.includes(this.selectedTag) && p.name.toLowerCase().includes(this.userSearch.toLowerCase())) {
+          this.productsToShow.push(p);
+        }
+      }
+      
     })
-    console.log(this.productsToShow)
   }
 
   ngOnInit():void {
-    this.allProducts = this._productSvc.getAllProducts();
-    this.productsToShow = this.allProducts;
+    this.productsToShow = this._productSvc.getAllProducts();
     this.tagCounts = this._productSvc.getTagsCount();
   }
 }

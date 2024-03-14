@@ -36,7 +36,7 @@
   </div>
   <div class="product-tags flex flex-wrap justify-center mt-20">
   	<div *ngFor="let tag of tagCounts" class="text-center max-sm:basis-[50%]">
-  		<button class="mb-5 mt-5 tag ml-10 mr-10 p-2 shadow-2xl rounded-xl max-sm:h-20 max-sm:w-20 hover:text-indigo-600 duration-150">{{ tag.tag }} ({{ tag.count }})</button>
+  		<button [ngClass]="{'text-indigo-600' : tag.tag === selectedTag}" (click)="setTag(tag.tag);" class="mb-5 mt-5 tag ml-10 mr-10 p-2 shadow-2xl rounded-xl max-sm:h-20 max-sm:w-20 hover:text-indigo-600 duration-150">{{ tag.tag }} ({{ tag.count }})</button>
   	</div>
   </div>
   <div class="items-list ml-20 mr-20 mt-20 flex lg:justify-center sm:justify-center text-center flex-wrap">
