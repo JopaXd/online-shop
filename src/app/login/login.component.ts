@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
     let status = this._userSvc.login({"email": this.form.value.email, "password": this.form.value.password})
     if (status === -1) {
       this.error = "Email or password incorrect!";

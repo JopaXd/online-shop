@@ -42,6 +42,33 @@
       <p class="text-3xl mt-4 text-center mb-6 font-bold">Online Shop!</p>
     	</div>
       <hr class="w-full bg-black text-black border-black h-1" />
+      <div class="sidenav-links mt-10">
+        <div *ngIf="!getUser()" class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
+          <a [routerLink]="['/register']" class="text-xl flex">
+            <span class="material-symbols-outlined inline pt-1 pl-3">add</span>Registration
+          </a>
+        </div>
+        <div *ngIf="!getUser()" class="sidenav-link pt-4 pb-4 mt-5 mb-5 ml-10 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
+          <a [routerLink]="['/login']" class="text-xl flex">
+            <span class="material-symbols-outlined inline pt-1 pl-3">login</span>User Login
+          </a>
+        </div>
+        <div *ngIf="getUser()" class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
+          <a [routerLink]="['/profile']" class="text-xl flex">
+            <span class="material-symbols-outlined inline pt-1 pl-3">person</span>User Profile
+          </a>
+        </div>
+        <div class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
+          <a [routerLink]="['/']" class="text-xl flex">
+            <span class="material-symbols-outlined inline pt-1 pl-3">shopping_bag</span>Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr class="w-full bg-black text-black border-black h-1" />
+    <div class="loggedInStatus mt-3">
+      <p *ngIf="getUser()" class="text-l text-center">Logged in as: {{ getUser().firstName }} {{ getUser().lastName }}!</p>
+      <p *ngIf="!getUser()" class="text-l text-center">Not logged in.</p>
     </div>
   </div>
 </div>

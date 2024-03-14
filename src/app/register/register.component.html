@@ -115,8 +115,12 @@
               class="invalid-feedback"
             >
               <div class="text-red-500" *ngIf="f.password.errors.required">Password is required</div>
+              <div class="text-red-500" *ngIf="f.password.errors.minlength">Password has to be at least 8 characters long!</div>
             </div>
           </div>
+        </div>
+        <div *ngIf="error" class="mt-2">
+          <p class="text-red-500">{{ error }}</p>
         </div>
         <div class="text-center">
           <button class="text-center w-full bg-black rounded-2xl text-white mt-20 p-3 pl-7 pr-7 hover:bg-white hover:text-black duration-150">Register</button>
