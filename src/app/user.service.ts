@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from "./models/user";
-
-interface loginInput{
-  email:string;
-  password:string;
-}
+import { RegisterInput } from './models/register_input';
+import { LoginInput } from './models/login_input';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +10,7 @@ export class UserService {
 
   users:Array<User> = [
       {
+        "id": 1,
         "firstName": "Pavle",
         "lastName": "Milanov",
         "email": "pavle@gmail.com",
@@ -20,6 +18,7 @@ export class UserService {
         "dateOfBirth": "2003-14-10"
       },
       {
+        "id" : 2,
         "firstName": "Pavle2",
         "lastName": "Milanov2",
         "email": "pavle2@gmail.com",
@@ -27,6 +26,7 @@ export class UserService {
         "dateOfBirth": "2003-14-10"
       },
       {
+        "id": 3,
         "firstName": "Pavle3",
         "lastName": "Milanov3",
         "email": "pavle3@gmail.com",
@@ -35,11 +35,13 @@ export class UserService {
       }
   ]
 
-  currentUser:User | null = null;
+  currentUser:User = null;
+
+  idCount = 4;
 
   constructor() { }
 
-  register(newUser:User):number {
+  register(newUser:RegisterInput):number {
     let emailExists:boolean = false;
     this.users.forEach((u) => {
       if (newUser.email === u.email){
@@ -49,14 +51,16 @@ export class UserService {
     if (emailExists){
       return -1
     }
-    this.users.push(newUser);
-    this.currentUser = newUser;
+    let userToAdd = {"id": this.idCount, "firstName": newUser.firstName, "lastName": newUser.lastName, "dateOfBirth" : newUser.dateOfBirth, "email": newUser.email, "password": newUser.password}
+    this.users.push(userToAdd);
+    this.currentUser = userToAdd;
+    this.idCount++;
     return 0
   }
 
-  login(userInput:loginInput):number {
+  login(userInput:LoginInput):number {
     let loggedIn:boolean = false;
-    let userToLogin:User | null = null;
+    let userToLogin:User = null;
     this.users.forEach((u:User) => {
       if (userInput.email === u.email){
         if (userInput.password === u.password){
@@ -76,5 +80,15 @@ export class UserService {
 
   getCurrentUser() {
     return this.currentUser;
+  }
+
+  updateUser(oldUser:User, editedUser:User) {
+    this.users.forEach((u:User, index:number) =>{
+      if (oldUser.id === u.id){
+        this.users[index] = editedUser;
+        return;
+      }
+    })
+    this.currentUser = editedUser;
   }
 }

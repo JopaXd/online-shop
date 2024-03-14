@@ -10,6 +10,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ProductService } from './product.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     NavigationComponent,
     FooterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
