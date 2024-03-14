@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     }
     else{
       console.log("success!");
-      this.router.navigate(["/profile"]);
+      this.router.navigate(["/"]);
     }
   }
 
