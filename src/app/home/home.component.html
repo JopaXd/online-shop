@@ -1,9 +1,9 @@
-<div class="home-content m-7 ml-14 mr-14">
-  <div class="main-banner bg-indigo-600 mt-10 rounded-3xl">
-    <div class="main-banner-content p-10 flex ml-10 mr-10">
+<div class="home-content">
+  <div class="main-banner bg-indigo-600 mt-10 rounded-3xl lg:ml-20 lg:mr-20 ml-5 mr-5">
+    <div class="main-banner-content p-10 flex ">
       <div class="left-side m-5 flex-auto justify-center">
-        <p class="text-3xl text-white">NEW DEALS!</p>
-        <p class="text-3xl text-white">CHECK THEM OUT!</p>
+        <p class="md:text-3xl sm:text-xl text-white">NEW DEALS!</p>
+        <p class="md:text-3xl sm:text-xl text-white">CHECK THEM OUT!</p>
         <button
           class="bg-black rounded-2xl text-white mt-20 p-3 pl-7 pr-7 hover:bg-white hover:text-black duration-150">
           Discover
@@ -11,13 +11,13 @@
       </div>
       <div class="right-side flex-auto h-100 flex justify-center items-center lg:justify-end">
         <img
-          class="rounded-3xl mix-blend-multiply w-60 h-60"
+          class="rounded-3xl mix-blend-multiply md:w-60 md:h-60 sm:w-40 sm:h-40"
           src="https://dr9l7gb9cebpv.cloudfront.net/media/catalog/product/cache/b33a4beff22b16e443cf02686e59d8ab/a/0/a08096c_a_107x1_3.jpg"
         />
       </div>
     </div>
   </div>
-  <div class="categories-section">
+  <div class="categories-section ml-5 mr-5 lg:ml-20 lg:mr-20">
 	  <div class="categories-title mt-6 items-center justify-between flex">
 	  	<p class="text-4xl">Categories</p>
 	  	<a href="#" class="text-xl">See all</a>
@@ -37,16 +37,16 @@
 	  	</div>
 	  </div>
   </div>
-  <div class="picks-section mt-6">
-  	<div class="picks-title mt-6 items-center justify-between flex">
+   <div class="picks-section mt-6">
+  	<div class="picks-title mt-6 items-center justify-between flex ml-3 mr-3 lg:ml-20 lg:mr-20">
 	  <p class="text-4xl">Our Picks</p>
 	  <a href="#" class="text-xl">See all</a>
   	</div>
-  	<div class="picks mt-20 flex justify-between text-center">
-	  	<div class="pick flex-1" *ngFor="let product of randomProducts">
-		  	<img class="ml-auto mr-auto rounded-md w-60 h-60" src="{{ product.image }}"/>	
-		  	<p class="text-md text-center mt-4">{{ product.name }}</p>
-		  	<p class="text-md text-indigo-600 text-center">{{ product.price }}</p>
+  	<div class="picks mt-20 flex justify-between text-center mb-10">
+	  	<div class="pick flex-1 ml-5 mr-5" *ngFor="let product of randomProducts">
+		  	<img class="ml-auto mr-auto rounded-md md:w-60 md:h-60 sm:w-0 sm:h-20" src="{{ product.image }}"/>	
+		  	<p class="md:text-md text-sm text-center mt-4">{{ product.name }}</p>
+		  	<p class="md:text-md text-sm text-indigo-600 text-center">{{ product.price }}</p>
 	  	</div>
 	  </div>
   </div>
