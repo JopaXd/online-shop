@@ -11,6 +11,7 @@ import { ProductService } from './product.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProfileComponent } from './profile/profile.component';
     NavigationComponent,
     FooterComponent,
     ProfileComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,6 +28,10 @@
   </div>
 </div>
 
+<div (click)="toggle()" *ngIf="sidebarToggle" class="overlay fixed top-0 h-full w-full bg-black bg-opacity-40">
+  
+</div>
+
 <div
   class="sidenav bg-gray-200 transition-all duration-500 text-black z-10 h-screen fixed top-0 -left-full w-80"
   [class.left-0]="sidebarToggle">
@@ -44,27 +48,27 @@
       <hr class="w-full bg-black text-black border-black h-1" />
       <div class="sidenav-links mt-10">
         <div class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
-          <a [routerLink]="['/']" class="text-xl flex">
+          <a (click)="toggle()" [routerLink]="['/']" class="text-xl flex">
             <span class="material-symbols-outlined inline pt-1 pl-3">home</span>Home
           </a>
         </div>
         <div *ngIf="!getUser()" class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
-          <a [routerLink]="['/register']" class="text-xl flex">
+          <a (click)="toggle()" [routerLink]="['/register']" class="text-xl flex">
             <span class="material-symbols-outlined inline pt-1 pl-3">add</span>Registration
           </a>
         </div>
         <div *ngIf="!getUser()" class="sidenav-link pt-4 pb-4 mt-5 mb-5 ml-10 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
-          <a [routerLink]="['/login']" class="text-xl flex">
+          <a (click)="toggle()" [routerLink]="['/login']" class="text-xl flex">
             <span class="material-symbols-outlined inline pt-1 pl-3">login</span>User Login
           </a>
         </div>
         <div *ngIf="getUser()" class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
-          <a [routerLink]="['/profile']" class="text-xl flex">
+          <a (click)="toggle()" [routerLink]="['/profile']" class="text-xl flex">
             <span class="material-symbols-outlined inline pt-1 pl-3">person</span>User Profile
           </a>
         </div>
         <div class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
-          <a [routerLink]="['/']" class="text-xl flex">
+          <a (click)="toggle()" [routerLink]="['/products']" class="text-xl flex">
             <span class="material-symbols-outlined inline pt-1 pl-3">shopping_bag</span>Shopping
           </a>
         </div>
