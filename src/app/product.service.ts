@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { allProducts } from './products';
 import { Product } from './models/product';
 import { TagCount } from './models/tag_count';
+import { Review } from './models/review';
+import { User } from './models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +52,22 @@ export class ProductService {
       tagsList.push({"tag":key, "count":tags[key]});
     })
     return tagsList;
+  }
+
+  addReview(product:Product, review:Review){
+    //Check if there is already a review by this user.
+    let ratingEdited:boolean = false;
+    product.reviews.forEach((r:Review, indx:number) => {
+      console.log("edit");
+      if (r.userID === review.userID) {
+        //Edit the review.
+        product.reviews[indx] = review;
+        ratingEdited = true;
+        return;
+      }
+    })
+    if (!ratingEdited){
+      product.reviews.push(review);
+    }
   }
 }

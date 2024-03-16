@@ -26,8 +26,8 @@
         </svg>
       </div>
       <input
-      	[(ngModel)]="userSearch"
-      	(ngModelChange)="search(userSearch)"
+        [(ngModel)]="userSearch"
+        (ngModelChange)="search(userSearch)"
         type="search"
         class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-600 focus:border-indigo-600 dark:focus:border-indigo-600 shadow-xl"
         placeholder="Search products!"
@@ -35,18 +35,47 @@
     </div>
   </div>
   <div class="product-tags flex flex-wrap justify-center mt-20">
-  	<div *ngFor="let tag of tagCounts" class="text-center max-sm:basis-[50%]">
-  		<button [ngClass]="{'text-indigo-600' : tag.tag === selectedTag}" (click)="setTag(tag.tag);" class="mb-5 mt-5 tag ml-10 mr-10 p-2 shadow-2xl rounded-xl max-sm:h-20 max-sm:w-20 hover:text-indigo-600 duration-150">{{ tag.tag }} ({{ tag.count }})</button>
-  	</div>
-  </div>
-  <div class="items-list ml-20 mr-20 mt-20 flex lg:justify-center sm:justify-center text-center flex-wrap">
-  	<div class="item mr-10 ml-10 mb-20 lg:basis-[28%] md:basis-[50%] sm:basis-[100%] max-sm:basis-[100%]" *ngFor="let product of productsToShow">
-  		<img class="ml-auto mr-auto rounded-md md:w-60 md:h-60 w-20 h-20" src="{{ product.image }}"/>	
-	  	<p class="md:text-xl text-sm text-center mt-4">{{ product.name }}</p>
-		  <p class="md:text-xl text-sm text-indigo-600 text-center">{{ product.price }} RSD</p>
-      <button [class.text-indigo-600]="cartItems.includes(product)" *ngIf="currentUser" (click)="addToCart(product);" class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
-        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> shopping_cart </span>
+    <div *ngFor="let tag of tagCounts" class="text-center max-sm:basis-[50%]">
+      <button
+        [ngClass]="{ 'text-indigo-600': tag.tag === selectedTag }"
+        (click)="setTag(tag.tag)"
+        class="mb-5 mt-5 tag ml-10 mr-10 p-2 shadow-2xl rounded-xl max-sm:h-20 max-sm:w-20 hover:text-indigo-600 duration-150"
+      >
+        {{ tag.tag }} ({{ tag.count }})
       </button>
-  	</div>
+    </div>
+  </div>
+  <div
+    class="items-list ml-20 mr-20 mt-20 flex lg:justify-center sm:justify-center text-center flex-wrap"
+  >
+    <div
+      class="item mr-10 ml-10 mb-20 lg:basis-[28%] md:basis-[50%] sm:basis-[100%] max-sm:basis-[100%]"
+      *ngFor="let product of productsToShow"
+    >
+      <img
+        class="ml-auto mr-auto rounded-md md:w-60 md:h-60 w-20 h-20"
+        src="{{ product.image }}"
+      />
+      <p class="md:text-xl text-sm text-center mt-4">{{ product.name }}</p>
+      <p class="md:text-xl text-sm text-indigo-600 text-center">
+        {{ product.price }} RSD
+      </p>
+      <p *ngIf="product.reviews!.length > 0">
+        {{ getAverageReviews(product) }}/5
+        <span class="text-indigo-600 material-symbols-outlined"> star </span>
+      </p>
+      <button
+        [class.text-indigo-600]="cartItems.includes(product)"
+        *ngIf="currentUser"
+        (click)="addToCart(product)"
+        class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2"
+      >
+        <span
+          class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"
+        >
+          shopping_cart
+        </span>
+      </button>
+    </div>
   </div>
 </div>

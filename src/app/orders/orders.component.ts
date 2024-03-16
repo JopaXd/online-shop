@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { ProductService } from '../product.service';
 import { Router } from "@angular/router";
 import { Order } from '../models/order'; 
 import { User } from '../models/user'; 
+import { Product } from '../models/product';
+import { Review } from '../models/review';
 
 @Component({
   selector: 'app-orders',
@@ -17,6 +20,7 @@ export class OrdersComponent implements OnInit {
 
   constructor (
     private _userSvc: UserService,
+    private _productSvc: ProductService,
     private router: Router
   ) {}
 
@@ -48,6 +52,11 @@ export class OrdersComponent implements OnInit {
 
   cancelOrder(order: Order){
     order.status = "cancelled";
+  }
+
+  setRating(value:number, product:Product) {
+    let review:Review = {"rating" : value, "userID": this.currentUser.id};
+    this._productSvc.addReview(product, review);
   }
 
 }
