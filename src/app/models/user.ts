@@ -1,4 +1,5 @@
 import { Cart } from './cart';
+import { Order } from './order'; 
 
 export interface User {
 	id:number
@@ -8,4 +9,5 @@ export interface User {
 	password:string;
 	dateOfBirth:string;
 	cart?:Cart;
+	orders?:Array<Order>;
 }

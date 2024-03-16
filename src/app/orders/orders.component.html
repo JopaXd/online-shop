@@ -1,0 +1,47 @@
+<div *ngIf="userOrders.length > 0; else NoOrders" class="order-list mt-24 mb-10 lg:ml-40 lg:mr-40 ml-3 mr-3">
+  <div
+    class="order border-indigo-600 rounded-xl border-2 pb-8 pt-3 pl-5 pr-5 h-20 md:h-10 transition-all overflow-hidden duration-500 mt-5"
+    [class.h-max]="toggledOrders[indx]"
+    [class.h-20]="!toggledOrders[indx]"
+    [class.md:h-10]="!toggledOrders[indx]"
+    *ngFor="let order of userOrders; let indx = index;"
+  >
+    <div class="order-content flex justify-between">
+      <p class="text-md text-center font-bold">Order ID: {{ order.id }}</p>
+      <p class="text-md text-center font-bold">Date: {{ formatDate(order.date) }}</p>
+      <p class="text-md text-center font-bold">Status: {{ order.status }}.</p>
+      <button *ngIf="!toggledOrders[indx]" (click)="toggleOrder(indx)" class="">
+        <span class="material-symbols-outlined"> expand_more </span>
+      </button>
+      <button *ngIf="toggledOrders[indx]" (click)="toggleOrder(indx)" class="">
+        <span class="material-symbols-outlined"> expand_less </span>
+      </button>
+    </div>
+    <div class="expanded-content mt-10">
+      <div class="product-list">
+      	<div *ngFor="let cart_item of order.order.cartItems" class="product mt-5 text-center">
+          <img
+            class="size-16 md:size-28 ml-auto mr-auto"
+            src="{{ cart_item.product.image }}"
+          />
+          <p class="text-lg font-bold mt-2">{{ cart_item.product.name }}</p>
+          <p class="text-lg font-bold mt-2">{{ cart_item.product.price * cart_item.quantity }} RSD</p>
+          <p class="text-lg font-bold mt-2">Quantity: {{ cart_item.quantity }}</p>
+          <hr class="mt-10 text-indigo-600 bg-indigo-600 border-2 border-indigo-600"/>
+        </div>
+      </div>
+      <div class="status-buttons text-center mt-5">
+      	<button [attr.disabled]="order.status === 'arrived' || order.status === 'cancelled'? true : null" (click)="confirmOrder(order);" class="bg-gray-200 border-r-4 rounded-3xl  hover:enabled:text-indigo-600 transition duration-150 m-2 ml-2 mr-2">
+      	  <span class="material-symbols-outlined text-sm p-2 pl-3"> check_circle </span>
+      	</button>
+      	<button [attr.disabled]="order.status === 'arrived' || order.status === 'cancelled'? true : null" (click)="cancelOrder(order);" class="bg-gray-200 border-r-4 rounded-3xl  hover:enabled:text-indigo-600 transition duration-150 m-2 ml-2 mr-2">
+      	  <span class="material-symbols-outlined text-sm p-2 pl-3"> cancel </span>
+      	</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #NoOrders>
+	<p>No orders</p>
+</ng-template>

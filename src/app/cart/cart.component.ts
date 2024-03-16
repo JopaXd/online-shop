@@ -49,6 +49,15 @@ export class CartComponent implements OnInit {
     this.updateCartTotal();
   }
 
+  generateRandomId(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomId = '';
+    for (let i = 0; i < length; i++) {
+        randomId += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return randomId;
+  }
+
   increaseQty(inputRef:any, cart_item:CartItem) {
     inputRef.value++;
     cart_item.quantity++;
@@ -59,5 +68,13 @@ export class CartComponent implements OnInit {
     inputRef.value--;
     cart_item.quantity--;
     this.updateCartTotal();
+  }
+
+  buy() {
+    let currentDate: Date = new Date();
+    let newOrder = {"id": this.generateRandomId(10), "order": {...this.currentUser.cart}, "date" : currentDate, "status": "in progress", "orderCost": this.cartTotal}
+    this.currentUser.orders.push(newOrder);
+    this.currentUser.cart.cartItems = [];
+    this.userCart = null;
   }
 }

@@ -5,6 +5,7 @@ import { LoginInput } from './models/login_input';
 import { Cart } from './models/cart';
 import { CartItem } from './models/cartitem';
 import { Product } from './models/product';
+import { Order } from './models/order'; 
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class UserService {
         "email": "pavle@gmail.com",
         "password":"12345678",
         "dateOfBirth": "2003-14-10",
-        "cart": { "cartItems": [] }
+        "cart": { "cartItems": [] },
+        "orders": []
       },
       {
         "id" : 2,
@@ -28,7 +30,9 @@ export class UserService {
         "email": "pavle2@gmail.com",
         "password":"123456789",
         "dateOfBirth": "2003-14-10",
-        "cart": { "cartItems": [] }
+        "cart": { "cartItems": [] },
+        "orders": []
+
 
       },
       {
@@ -38,7 +42,8 @@ export class UserService {
         "email": "pavle3@gmail.com",
         "password":"12345678910",
         "dateOfBirth": "2003-14-10",
-        "cart": { "cartItems": [] }     
+        "cart": { "cartItems": [] },
+        "orders": []
      }
   ]
 
@@ -58,7 +63,7 @@ export class UserService {
     if (emailExists){
       return -1
     }
-    let userToAdd = {"id": this.idCount, "firstName": newUser.firstName, "lastName": newUser.lastName, "dateOfBirth" : newUser.dateOfBirth, "email": newUser.email, "password": newUser.password}
+    let userToAdd = {"id": this.idCount, "firstName": newUser.firstName, "lastName": newUser.lastName, "dateOfBirth" : newUser.dateOfBirth, "email": newUser.email, "password": newUser.password, "cart": { "cartItems": [] as CartItem[] }, "orders": [] as Order[] }
     this.users.push(userToAdd);
     this.currentUser = userToAdd;
     this.idCount++;
