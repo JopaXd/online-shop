@@ -21,6 +21,9 @@ export class RegisterComponent implements OnInit  {
   ) {}
 
   ngOnInit() {
+    if (this._userSvc.getCurrentUser()) {
+      this.router.navigate(["/"]);
+    }
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],

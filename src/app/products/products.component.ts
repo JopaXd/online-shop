@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { ProductService } from '../product.service';
 import { TagCount } from '../models/tag_count';
+import { UserService } from '../user.service';
+import { User } from '../models/user';
+import { CartItem } from '../models/cartitem'
 
 @Component({
   selector: 'app-products',
@@ -9,8 +12,10 @@ import { TagCount } from '../models/tag_count';
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
-  constructor(private _productSvc: ProductService) {}
+  constructor(private _productSvc: ProductService, private _userSvc: UserService) {}
 
+  currentUser:User = this._userSvc.getCurrentUser();
+  cartItems: Array<Product> = [];
   tagCounts:Array<TagCount>; 
   productsToShow:Array<Product> = [];
   userSearch:string = "";
@@ -23,6 +28,25 @@ export class ProductsComponent implements OnInit {
   setTag(tag:string) {
     this.selectedTag = tag;
     this.applyFilters();
+  }
+
+  addToCart(item:Product) {
+    let remove:boolean = false;
+    this.currentUser.cart.cartItems.forEach((c:CartItem, indx:number) => {
+      //This means the user wanted to remove the item from cart on click.
+      if (c.product === item){
+        this.cartItems.splice(0, 1);
+        this._userSvc.removeProductFromCart(this.currentUser, item);
+        remove = true;
+      }
+    })
+    if (remove) {
+      return;
+    }
+    else{
+      this._userSvc.addItemToCart(this.currentUser, item);
+      this.cartItems.push(item);      
+    }
   }
 
   applyFilters(){
@@ -46,5 +70,11 @@ export class ProductsComponent implements OnInit {
   ngOnInit():void {
     this.productsToShow = this._productSvc.getAllProducts();
     this.tagCounts = this._productSvc.getTagsCount();
+
+    if (this.currentUser){
+      this.currentUser.cart.cartItems.forEach((p:CartItem) => {
+        this.cartItems.push(p.product);
+      })
+    }
   }
 }

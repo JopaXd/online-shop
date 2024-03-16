@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this._userSvc.getCurrentUser()) {
+      this.router.navigate(["/"]);
+    }
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
@@ -43,10 +46,7 @@ export class LoginComponent implements OnInit {
       this.error = "Email or password incorrect!";
     }
     else{
-      console.log("success!");
       this.router.navigate(["/"]);
     }
   }
-
-
 }

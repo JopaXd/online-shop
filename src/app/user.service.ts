@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from "./models/user";
 import { RegisterInput } from './models/register_input';
 import { LoginInput } from './models/login_input';
+import { Cart } from './models/cart';
+import { CartItem } from './models/cartitem';
+import { Product } from './models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,8 @@ export class UserService {
         "lastName": "Milanov",
         "email": "pavle@gmail.com",
         "password":"12345678",
-        "dateOfBirth": "2003-14-10"
+        "dateOfBirth": "2003-14-10",
+        "cart": { "cartItems": [] }
       },
       {
         "id" : 2,
@@ -23,7 +27,9 @@ export class UserService {
         "lastName": "Milanov2",
         "email": "pavle2@gmail.com",
         "password":"123456789",
-        "dateOfBirth": "2003-14-10"
+        "dateOfBirth": "2003-14-10",
+        "cart": { "cartItems": [] }
+
       },
       {
         "id": 3,
@@ -31,11 +37,12 @@ export class UserService {
         "lastName": "Milanov3",
         "email": "pavle3@gmail.com",
         "password":"12345678910",
-        "dateOfBirth": "2003-14-10"
-      }
+        "dateOfBirth": "2003-14-10",
+        "cart": { "cartItems": [] }     
+     }
   ]
 
-  currentUser:User = null;
+  currentUser:User = this.users[0];
 
   idCount = 4;
 
@@ -90,5 +97,31 @@ export class UserService {
       }
     })
     this.currentUser = editedUser;
+  }
+
+  addItemToCart(user:User, product:Product) {
+    user.cart.cartItems.push({"product": product, "quantity": 1});
+  }
+
+  removeProductFromCart(user: User, product:Product|CartItem){
+    //Bizzare way to check which interface product is.
+    //Product
+    if ('image' in product){
+        user.cart.cartItems.forEach((c:CartItem ,indx:number) => {
+        if (c.product === product) {
+          user.cart.cartItems.splice(indx, 1);
+          return;
+        }
+      })
+    }
+    //CartItem
+    else if ('quantity' in product){
+      user.cart.cartItems.forEach((c:CartItem ,indx:number) => {
+        if (c == product) {
+          user.cart.cartItems.splice(indx, 1);
+          return;
+        }
+      })
+    }
   }
 }
