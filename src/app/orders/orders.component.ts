@@ -59,4 +59,36 @@ export class OrdersComponent implements OnInit {
     this._productSvc.addReview(product, review);
   }
 
+  checkRating(product:Product, rating:number){
+    let trueRating:boolean = false;
+    if (product.reviews.length > 0) {
+      product.reviews.forEach((r:Review) => {
+        if (r.userID === this.currentUser.id) {
+          console.log("b")
+
+          if (r.rating === rating){
+          console.log("c")
+            console.log(product)
+            console.log(rating)
+            console.log("---------")
+            trueRating = true;
+            return;
+          }
+          else{
+                console.log("d")
+
+            //A user can have only one rating.
+            //If a rating with an id is found, at it is not the desired rating, its false.
+            return false;
+          }
+        }
+      })
+      return trueRating;
+    }
+    else{
+          console.log("e")
+      return false;
+    }
+  }
+
 }
