@@ -16,6 +16,7 @@ import { ProductsComponent } from './products/products.component';
 import { FormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { OrdersComponent } from './orders/orders.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { OrdersComponent } from './orders/orders.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

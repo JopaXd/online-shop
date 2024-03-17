@@ -3,11 +3,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from '../models/user';
 import {Router} from "@angular/router"
+import {
+  trigger,
+  state,
+  transition,
+  style,
+  animate,
+} from '@angular/animations';
+import { Notification } from '../models/notification'
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('1s ease-out', style({ opacity: '1' })),
+      ]),
+    ]),
+  ],
 })
 export class ProfileComponent implements OnInit  {
   form!: FormGroup
@@ -15,6 +31,8 @@ export class ProfileComponent implements OnInit  {
   error?: string;
   currentUser:User = null;
   uneditedUser: User = null;
+
+  notifications: Array<Notification> = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,5 +66,18 @@ export class ProfileComponent implements OnInit  {
       return;
     }
     this._userSvc.updateUser(this.uneditedUser, this.currentUser);
+    let newNotification: Notification = { text: 'User updated!', type: 'success' };
+    this.notifications.push(newNotification);
+    setTimeout(() => {
+      this.closeNotification(newNotification);
+    }, 5000);
+  }
+
+  closeNotification(notif: Notification) {
+    this.notifications.forEach((n: Notification, indx: number) => {
+      if (notif === n) {
+        this.notifications.splice(indx, 1);
+      }
+    });
   }
 }

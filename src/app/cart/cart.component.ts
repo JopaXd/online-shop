@@ -4,11 +4,27 @@ import { Router } from "@angular/router"
 import { User } from '../models/user';
 import { Cart } from '../models/cart';
 import { CartItem } from '../models/cartitem';
+import {
+  trigger,
+  state,
+  transition,
+  style,
+  animate,
+} from '@angular/animations';
+import { Notification } from '../models/notification'
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrl: './cart.component.css',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('1s ease-out', style({ opacity: '1' })),
+      ]),
+    ]),
+  ],
 })
 
 export class CartComponent implements OnInit {
@@ -21,6 +37,8 @@ export class CartComponent implements OnInit {
   currentUser: User = null;
   userCart:Cart = null;
   cartTotal:number = 0;
+
+  notifications: Array<Notification> = [];
 
   updateCartTotal() {
     this.cartTotal = 0;
@@ -77,5 +95,18 @@ export class CartComponent implements OnInit {
     this.currentUser.orders.push(newOrder);
     this.currentUser.cart.cartItems = [];
     this.userCart = null;
+    let newNotification: Notification = { text: 'Order placed!', type: 'success' };
+    this.notifications.push(newNotification);
+    setTimeout(() => {
+      this.closeNotification(newNotification);
+    }, 5000);
+  }
+
+  closeNotification(notif: Notification) {
+    this.notifications.forEach((n: Notification, indx: number) => {
+      if (notif === n) {
+        this.notifications.splice(indx, 1);
+      }
+    });
   }
 }

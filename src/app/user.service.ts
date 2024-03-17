@@ -141,11 +141,12 @@ export class UserService {
       }
     })
     if (remove) {
-      return;
+      return "removed";
     }
     else{
       this.addItemToCart(this.currentUser, item);
-      cartItems.push(item);      
+      cartItems.push(item);    
+      return "added";  
     }
   }
 
