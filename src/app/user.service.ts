@@ -47,7 +47,7 @@ export class UserService {
      }
   ]
 
-  currentUser:User = this.users[0];
+  currentUser:User = null;
 
   idCount = 4;
 
