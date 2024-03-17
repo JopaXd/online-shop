@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
     this.currentUser.cart.cartItems.forEach((c:CartItem, indx:number) => {
       //This means the user wanted to remove the item from cart on click.
       if (c.product === item){
-        this.cartItems.splice(0, 1);
+        this.cartItems.splice(indx, 1);
         this._userSvc.removeProductFromCart(this.currentUser, item);
         remove = true;
       }
