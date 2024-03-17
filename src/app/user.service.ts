@@ -149,4 +149,8 @@ export class UserService {
     }
   }
 
+  logout() { 
+    this.currentUser = null;
+  }
+
 }

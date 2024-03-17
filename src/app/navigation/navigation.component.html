@@ -84,6 +84,11 @@
             <span class="material-symbols-outlined inline pt-1 pl-3">orders</span>Orders
           </a>
         </div>
+        <div *ngIf="getUser()" class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
+          <a (click)="logout()" [routerLink]="['/']" class="text-xl flex">
+            <span class="material-symbols-outlined inline pt-1 pl-3">logout</span>Logout
+          </a>
+        </div>
       </div>
     </div>
     <hr class="w-full bg-black text-black border-black h-1" />

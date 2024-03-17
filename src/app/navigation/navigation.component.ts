@@ -21,4 +21,9 @@ export class NavigationComponent {
     this.sidebarToggle = !this.sidebarToggle;
   }
 
+  logout() {
+    this.sidebarToggle = !this.sidebarToggle;
+    this._userSvc.logout();
+  }
+
 }
