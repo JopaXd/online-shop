@@ -5,6 +5,7 @@
         <p class="md:text-3xl sm:text-xl text-white">NEW DEALS!</p>
         <p class="md:text-3xl sm:text-xl text-white">CHECK THEM OUT!</p>
         <button
+        	[routerLink]="'products'"
           class="bg-black rounded-2xl text-white mt-20 p-3 pl-7 pr-7 hover:bg-white hover:text-black duration-150">
           Discover
         </button>
@@ -20,7 +21,7 @@
   <div class="categories-section ml-5 mr-5 lg:ml-20 lg:mr-20">
 	  <div class="categories-title mt-6 items-center justify-between flex">
 	  	<p class="text-4xl">Categories</p>
-	  	<a href="#" class="text-xl">See all</a>
+	  	<a [routerLink]="'products'" class="text-xl">See all</a>
 	  </div>
 	  <div class="categories mt-20 flex justify-between">
 	  	<div class="category flex-1">
@@ -40,7 +41,7 @@
    <div class="picks-section mt-6">
   	<div class="picks-title mt-6 items-center justify-between flex ml-3 mr-3 lg:ml-20 lg:mr-20">
 	  <p class="text-4xl">Our Picks</p>
-	  <a href="#" class="text-xl">See all</a>
+	  <a [routerLink]="'products'" class="text-xl">See all</a>
   	</div>
   	<div class="picks mt-20 flex justify-between text-center mb-10">
 	  	<div class="pick flex-1 ml-5 mr-5" *ngFor="let product of randomProducts">
