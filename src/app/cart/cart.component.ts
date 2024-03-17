@@ -65,9 +65,11 @@ export class CartComponent implements OnInit {
   }
 
   decreaseQty(inputRef:any, cart_item:CartItem) {
-    inputRef.value--;
-    cart_item.quantity--;
-    this.updateCartTotal();
+    if (cart_item.quantity !== 1){
+      inputRef.value--;
+      cart_item.quantity--;
+      this.updateCartTotal();
+    }
   }
 
   buy() {
