@@ -21,7 +21,10 @@ export class ProductsComponent implements OnInit {
   userSearch:string = "";
   selectedTag: string = "all";
 
+  p:number = 1;
+
   search(text:string){
+    this.p = 1;
     this.applyFilters();
   }
 

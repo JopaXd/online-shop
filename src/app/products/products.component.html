@@ -50,7 +50,7 @@
   >
     <div
       class="item mr-10 ml-10 mb-20 lg:basis-[28%] md:basis-[50%] sm:basis-[100%] max-sm:basis-[100%]"
-      *ngFor="let product of productsToShow"
+      *ngFor="let product of productsToShow | paginate: { itemsPerPage:25, currentPage: p }"
     >
       <img
         class="ml-auto mr-auto rounded-md md:w-60 md:h-60 w-20 h-20"
@@ -78,4 +78,5 @@
       </button>
     </div>
   </div>
+  <pagination-controls class="flex justify-center" (pageChange)="p = $event"></pagination-controls>
 </div>
