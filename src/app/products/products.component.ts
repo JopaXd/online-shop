@@ -24,11 +24,11 @@ export class ProductsComponent implements OnInit {
   p:number = 1;
 
   search(text:string){
-    this.p = 1;
     this.applyFilters();
   }
 
   setTag(tag:string) {
+    this.p = 1;
     this.selectedTag = tag;
     this.applyFilters();
   }
