@@ -70,4 +70,12 @@ export class ProductService {
       product.reviews.push(review);
     }
   }
+
+  getAverageReviews(product:Product) {
+    let ratings:Array<number> = product.reviews.map(r => r.rating);
+    let sum = ratings.reduce((a, b) => a + b, 0);
+    let average = sum / ratings.length; 
+    return average
+  }
+  
 }

@@ -38,17 +38,37 @@
 	  	</div>
 	  </div>
   </div>
-   <div class="picks-section mt-6">
-  	<div class="picks-title mt-6 items-center justify-between flex ml-3 mr-3 lg:ml-20 lg:mr-20">
-	  <p class="text-4xl">Our Picks</p>
-	  <a [routerLink]="'products'" class="text-xl">See all</a>
-  	</div>
-  	<div class="picks mt-20 flex justify-between text-center mb-10">
-	  	<div class="pick flex-1 ml-5 mr-5" *ngFor="let product of randomProducts">
-		  	<img class="ml-auto mr-auto rounded-md md:w-60 md:h-60 sm:w-0 sm:h-20" src="{{ product.image }}"/>	
-		  	<p class="md:text-md text-sm text-center mt-4">{{ product.name }}</p>
-		  	<p class="md:text-md text-sm text-indigo-600 text-center">{{ product.price }} RSD</p>
-	  	</div>
-	  </div>
+   <div
+    class="picks-section ml-20 mr-20 mt-20 flex lg:justify-center sm:justify-center text-center flex-wrap"
+  >
+    <div
+      class="pick mr-10 ml-10 mb-20 lg:basis-[28%] md:basis-[50%] sm:basis-[100%] max-sm:basis-[100%]"
+      *ngFor="let product of randomProducts"
+    >
+      <img
+        class="ml-auto mr-auto rounded-md md:w-60 md:h-60 w-20 h-20"
+        src="{{ product.image }}"
+      />
+      <p class="md:text-xl text-sm text-center mt-4">{{ product.name }}</p>
+      <p class="md:text-xl text-sm text-indigo-600 text-center">
+        {{ product.price }} RSD
+      </p>
+      <p *ngIf="product.reviews!.length > 0">
+        {{ _productSvc.getAverageReviews(product) }}/5
+        <span class="text-indigo-600 material-symbols-outlined"> star </span>
+      </p>
+      <button
+        [class.text-indigo-600]="cartItems.includes(product)"
+        *ngIf="currentUser"
+        (click)="_userSvc.addToCart(product, cartItems)"
+        class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2"
+      >
+        <span
+          class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"
+        >
+          shopping_cart
+        </span>
+      </button>
+    </div>
   </div>
 </div>

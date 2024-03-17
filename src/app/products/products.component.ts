@@ -12,7 +12,7 @@ import { CartItem } from '../models/cartitem'
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
-  constructor(private _productSvc: ProductService, private _userSvc: UserService) {}
+  constructor(public _productSvc: ProductService, public _userSvc: UserService) {}
 
   currentUser:User = this._userSvc.getCurrentUser();
   cartItems: Array<Product> = [];
@@ -33,25 +33,6 @@ export class ProductsComponent implements OnInit {
     this.applyFilters();
   }
 
-  addToCart(item:Product) {
-    let remove:boolean = false;
-    this.currentUser.cart.cartItems.forEach((c:CartItem, indx:number) => {
-      //This means the user wanted to remove the item from cart on click.
-      if (c.product === item){
-        this.cartItems.splice(indx, 1);
-        this._userSvc.removeProductFromCart(this.currentUser, item);
-        remove = true;
-      }
-    })
-    if (remove) {
-      return;
-    }
-    else{
-      this._userSvc.addItemToCart(this.currentUser, item);
-      this.cartItems.push(item);      
-    }
-  }
-
   applyFilters(){
     this.productsToShow = []
     //Tag first:
@@ -68,13 +49,6 @@ export class ProductsComponent implements OnInit {
       }
       
     })
-  }
-
-  getAverageReviews(product:Product) {
-    let ratings:Array<number> = product.reviews.map(r => r.rating);
-    let sum = ratings.reduce((a, b) => a + b, 0);
-    let average = sum / ratings.length; 
-    return average
   }
 
   ngOnInit():void {

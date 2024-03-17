@@ -129,4 +129,24 @@ export class UserService {
       })
     }
   }
+
+  addToCart(item:Product, cartItems:Array<Product>) {
+    let remove:boolean = false;
+    this.currentUser.cart.cartItems.forEach((c:CartItem, indx:number) => {
+      //This means the user wanted to remove the item from cart on click.
+      if (c.product === item){
+        cartItems.splice(indx, 1);
+        this.removeProductFromCart(this.currentUser, item);
+        remove = true;
+      }
+    })
+    if (remove) {
+      return;
+    }
+    else{
+      this.addItemToCart(this.currentUser, item);
+      cartItems.push(item);      
+    }
+  }
+
 }
