@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'products/:selectedTag', component: ProductsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: OrdersComponent }
 ];

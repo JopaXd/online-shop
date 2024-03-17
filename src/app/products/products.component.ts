@@ -5,6 +5,7 @@ import { TagCount } from '../models/tag_count';
 import { UserService } from '../user.service';
 import { User } from '../models/user';
 import { CartItem } from '../models/cartitem'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -12,14 +13,14 @@ import { CartItem } from '../models/cartitem'
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
-  constructor(public _productSvc: ProductService, public _userSvc: UserService) {}
+  constructor(private route:ActivatedRoute, public _productSvc: ProductService, public _userSvc: UserService) {}
 
   currentUser:User = this._userSvc.getCurrentUser();
   cartItems: Array<Product> = [];
   tagCounts:Array<TagCount>; 
   productsToShow:Array<Product> = [];
   userSearch:string = "";
-  selectedTag: string = "all";
+  selectedTag: string = "";
 
   p:number = 1;
 
@@ -52,6 +53,9 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit():void {
+
+    this.selectedTag = this.route.snapshot.paramMap.get('selectedTag') || "all";
+
     this.productsToShow = this._productSvc.getAllProducts();
     this.tagCounts = this._productSvc.getTagsCount();
 
