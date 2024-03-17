@@ -36,7 +36,6 @@ export class CartComponent implements OnInit {
       this.router.navigate(["/login"]);
     }
     this.updateCartTotal();
-    console.log(this._userSvc.getCurrentUser().cart)
   }
 
   removeFromCart(item: CartItem){
