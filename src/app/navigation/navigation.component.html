@@ -9,7 +9,7 @@
           close
         </span>
       </button>
-      <button class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+      <button [routerLink]="'products'" class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
         <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> search </span>
       </button>
     </div>
@@ -17,11 +17,14 @@
       <p class="text-center font-bold lg:text-2xl sm:text-xl">Online Shop!</p>
     </div>
     <div class="navbar-end flex-1 flex justify-end">
-      <button class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2 hover:text-indigo-600 transition duration-150">
-        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> favorite </span>
+       <button *ngIf="!getUser();" [routerLink]="'login'" class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> person </span>
       </button>
-      <button class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+      <button *ngIf="getUser();" [routerLink]="'cart'" class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
         <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> shopping_cart </span>
+      </button>
+      <button  [routerLink]="'/'" class="bg-gray-200 border-r-4 rounded-3xl m-2 ml-2 mr-2">
+        <span class="material-symbols-outlined p-3 text-center hover:text-indigo-600 transition duration-150"> home </span>
       </button>
     </div>
   </div>
@@ -78,7 +81,7 @@
         </div>
         <div *ngIf="getUser()" class="sidenav-link pt-4 pb-4 ml-10 mt-5 mb-5 mr-10 h-full hover:bg-indigo-600 hover:text-white duration-150 rounded-xl">
           <a (click)="toggle()" [routerLink]="['/orders']" class="text-xl flex">
-            <span class="material-symbols-outlined inline pt-1 pl-3">shopping_cart</span>Orders
+            <span class="material-symbols-outlined inline pt-1 pl-3">orders</span>Orders
           </a>
         </div>
       </div>
